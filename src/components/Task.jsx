@@ -4,12 +4,17 @@ import { FaTimes } from 'react-icons/fa';
 const Task = ({ task, onDelete, onToggle }) => {
   return (
     <div
-      onClick={(e) => {
+      onDoubleClick={(e) => {
+        e.stopPropagation();
+        onToggle(task.id);
+      }}
+      // this event function is for mobile devices
+      onTouchStart={(e) => {
         e.stopPropagation();
         onToggle(task.id);
       }}
       className={`task ${
-        task.reminder ? 'border-l-8 border-green-800' : ''
+        task.reminder && 'border-l-8 border-green-800'
       } my-2 rounded-md bg-slate-500 p-4 text-slate-200`}
     >
       <div className='flex items-center justify-between'>
